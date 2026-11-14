@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 
-// Підключення всіх модулів проєкту
 using ProjectManagement.Core.Models;
 using ProjectManagement.Core.Generators;
 using ProjectManagement.Algorithms.Common;
@@ -9,9 +8,13 @@ using ProjectManagement.Algorithms.Heap;
 using ProjectManagement.Algorithms.Comparators;
 
 
-// Перевірка доступності класів з обох проєктів (створення пустих об'єктів)
-var task = new TaskItem();
+var task = new TaskItem(1, "Приклад задачі", DateTime.Today.AddDays(7), TaskPriority.High, 4);
 var project = new Project();
+project.Add(task);
+
+Console.WriteLine(project);
+Console.WriteLine(task);
+
 var heapSort = new HeapSort();
 var quickSort = new QuickSort();
 var mergeSort = new MergeSort();

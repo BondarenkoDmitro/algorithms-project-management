@@ -91,7 +91,7 @@ dotnet run --project ProjectManagement.ConsoleApp
 - [x] Скласти файл README.md з архітектурою та розподілом ролей
 
 ### Етап 2. Предметна область та базові контракти
-- [ ] Дмитро: Реалізувати сутності `TaskItem.cs` та `Project.cs`
+- [x] Дмитро: Реалізувати сутності `TaskItem.cs` та `Project.cs`
 - [ ] Олександр: Описати інтерфейс `ISortingAlgorithm.cs` та клас `SortStatistics.cs`
 - [ ] Дмитро: Реалізувати генератор наборів даних `TaskDataGenerator.cs` (Random, Sorted, Reverse, Duplicates, Nearly Sorted)
 - [ ] Провести взаємну перевірку коду через Pull Request
@@ -121,3 +121,8 @@ dotnet run --project ProjectManagement.ConsoleApp
 - [ ] Спільно: Сформулювати підсумкові висновки курсового проєкту
 - [ ] Скласти список використаних джерел та оформити додатки з лістингами коду
 - [ ] Фінальна вичитка документа перед здачею
+  
+
+
+
++UnitTests:
