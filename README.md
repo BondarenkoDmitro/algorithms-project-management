@@ -93,7 +93,7 @@ dotnet run --project ProjectManagement.ConsoleApp
 ### Етап 2. Предметна область та базові контракти
 - [x] Дмитро: Реалізувати сутності `TaskItem.cs` та `Project.cs`
 - [x] Олександр: Описати інтерфейс `ISortingAlgorithm.cs` та клас `SortStatistics.cs`
-- [ ] Дмитро: Реалізувати генератор наборів даних `TaskDataGenerator.cs` (Random, Sorted, Reverse, Duplicates, Nearly Sorted)
+- [x] Дмитро: Реалізувати генератор наборів даних `TaskDataGenerator.cs` (Random, Sorted, Reverse, Duplicates, Nearly Sorted)
 - [ ] Провести взаємну перевірку коду через Pull Request
 
 ### Етап 3. Реалізація алгоритмів та структур даних
