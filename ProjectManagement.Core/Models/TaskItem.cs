@@ -13,7 +13,7 @@ public class TaskItem : IComparable<TaskItem>
     public int Id { get; set; }
     public string Title { get; set; } = "";
     public DateTime Deadline { get; set; }
-    public TaskPriority Priority { get; set; } = TaskPriority.Medium;
+    public TaskPriority Priority { get; set; }
     public double EstimatedHours { get; set; }
 
     public TaskItem(int id, string title, DateTime deadline, TaskPriority priority, double estimatedHours)
@@ -36,5 +36,5 @@ public class TaskItem : IComparable<TaskItem>
     }
 
     public override string ToString() =>
-        $"{Id}. {Title} | {Priority} | до {Deadline:dd.MM.yyyy} | {EstimatedHours} год";
+        $"{Id,4}  {Title,-32}  {Priority,-9}  {Deadline:dd.MM.yyyy}  {EstimatedHours,5:0.#}";
 }
