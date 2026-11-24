@@ -2,17 +2,21 @@
 
 namespace ProjectManagement.Core.Generators;
 
+// Типи тестових наборів: кожен по-своєму "важкий" для алгоритмів сортування.
 public enum DataSetType
 {
-    Random,
-    Sorted,
-    Reverse,
-    Duplicates,
-    NearlySorted
+    Random,       // випадковий порядок — середній випадок
+    Sorted,       // вже відсортовано — найкращий випадок
+    Reverse,      // зворотний порядок — найгірший випадок для купи
+    Duplicates,   // багато задач з однаковими ключами
+    NearlySorted  // майже відсортовано, кілька обмінів
 }
 
+// Генератор тестових наборів задач.
+// Відповідає за: створення N задач та підготовку їх у 5 різних порядках.
 public class TaskDataGenerator
 {
+    // Звідки беруться випадкові пріоритети.
     private static readonly TaskPriority[] Priorities =
     {
         TaskPriority.Low,
@@ -21,6 +25,7 @@ public class TaskDataGenerator
         TaskPriority.Critical
     };
 
+    // Шаблони назв, щоб тестові дані виглядали реалістично.
     private static readonly string[] Titles =
     {
         "Аналіз вимог",
@@ -33,8 +38,11 @@ public class TaskDataGenerator
         "Виправлення дефектів"
     };
 
+    // Фіксований seed: однаковий номер завжди дає однаковий набір,
+    // інакше результати бенчмарку неможливо перевірити повторно.
     private readonly Random _random;
 
+    // seed за замовчуванням, щоб бенчмарк був однаковий при кожному запуску.
     public TaskDataGenerator() : this(42)
     {
     }
@@ -44,6 +52,7 @@ public class TaskDataGenerator
         _random = new Random(seed);
     }
 
+    // Єдина точка входу: обирає потрібний набір за типом.
     public TaskItem[] Generate(int count, DataSetType type)
     {
         return type switch
@@ -57,6 +66,7 @@ public class TaskDataGenerator
         };
     }
 
+    // Випадкові задачі — основа для решти наборів.
     public TaskItem[] GenerateRandom(int count)
     {
         CheckCount(count);
@@ -68,6 +78,7 @@ public class TaskDataGenerator
         return tasks;
     }
 
+    // Той самий набір, але впорядкований за TaskItem.CompareTo (пріоритет -> дедлайн -> Id).
     public TaskItem[] GenerateSorted(int count)
     {
         var tasks = GenerateRandom(count);
@@ -75,6 +86,7 @@ public class TaskDataGenerator
         return tasks;
     }
 
+    // Зворотний порядок — максимальна кількість інверсій.
     public TaskItem[] GenerateReverse(int count)
     {
         var tasks = GenerateSorted(count);
@@ -82,6 +94,8 @@ public class TaskDataGenerator
         return tasks;
     }
 
+    // Лише 8 різних наборів ключів, що повторюються по колу:
+    // перевіряємо, як алгоритм поводиться з рівними елементами.
     public TaskItem[] GenerateDuplicates(int count)
     {
         CheckCount(count);
@@ -100,6 +114,7 @@ public class TaskDataGenerator
         return tasks;
     }
 
+    // Відсортовано, але ~5% сусідніх пар обміняно місцями.
     public TaskItem[] GenerateNearlySorted(int count)
     {
         var tasks = GenerateSorted(count);
@@ -116,6 +131,7 @@ public class TaskDataGenerator
         return tasks;
     }
 
+    // Одна випадкова задача: назва, дедлайн +1..90 днів, пріоритет, оцінка 1..24 год.
     private TaskItem CreateTask(int id)
     {
         return new TaskItem(
@@ -126,6 +142,7 @@ public class TaskDataGenerator
             _random.Next(1, 25));
     }
 
+    // Розмір набору має бути додатним.
     private static void CheckCount(int count)
     {
         if (count <= 0)
